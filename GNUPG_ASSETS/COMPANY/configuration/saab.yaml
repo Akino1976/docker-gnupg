@@ -1,0 +1,13 @@
+key_configuration:
+  secret_name: medhelp-fuse-keys
+  company_name: saab
+  array:
+    name_email: 'medhelp@support.se'
+    expire_date: '2022-06-07'
+    key_type: 'RSA'
+    key_length: 4096
+    key_usage: ''
+    subkey_type: 'RSA'
+    subkey_length: 4096
+    subkey_usage: 'encrypt,sign,auth'
+    passphrase: e4jL9mCaL

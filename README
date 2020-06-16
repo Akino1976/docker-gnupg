@@ -1,0 +1,23 @@
+# Docker and GnuPg
+
+## Used for?
+
+This is a docker images that helps in decrypting, encrypting, generating and uploading keys to
+AWS SSM service with Python
+
+Upload existing keys to AWS
+```bash
+save-ssm: buildimages
+	docker run --rm -it \
+        -e ENVIRONMENT=${ENVIRONMENT} \
+		-e AWS_ACCESS_KEY_ID=$(strip $(shell aws configure get aws_access_key_id --profile $(PROFILE))) \
+		-e AWS_SECRET_ACCESS_KEY=$(strip $(shell aws configure get aws_secret_access_key --profile $(PROFILE))) \
+        --name src \
+		--mount type=bind,source="${PWD}"/GNUPG_KEYS,target="/GNUPG_KEYS" \
+		--mount type=bind,source="${PWD}"/GNUPG_ASSETS,target="/GNUPG_ASSETS" \
+		gnupg-tools:$(VERSION) \
+        save_ssm \
+        --secret-key /GNUPG_KEYS/COMPANY/ \
+        --target-folder /GNUPG_ASSETS/COMPANY
+
+```
